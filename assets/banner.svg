@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050814" />
+      <stop offset="50%" stop-color="#0c1224" />
+      <stop offset="100%" stop-color="#111c38" />
+    </linearGradient>
+
+    <!-- Heatmap Gradient -->
+    <linearGradient id="heat-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.8" />
+      <stop offset="30%" stop-color="#4facfe" stop-opacity="0.7" />
+      <stop offset="65%" stop-color="#f59e0b" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ef4444" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- Glowing Text Gradient -->
+    <linearGradient id="title-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#f1f5f9" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <!-- Chiplet Border Gradient -->
+    <linearGradient id="border-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="50%" stop-color="#6366f1" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.6" />
+    </linearGradient>
+
+    <!-- Glow Filters -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="hotspot-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <style>
+      @keyframes pulse-hotspot {
+        0% { transform: scale(0.95); opacity: 0.65; }
+        50% { transform: scale(1.15); opacity: 0.95; }
+        100% { transform: scale(0.95); opacity: 0.65; }
+      }
+      @keyframes dash-flow {
+        0% { stroke-dashoffset: 60; }
+        100% { stroke-dashoffset: 0; }
+      }
+      @keyframes wave-heat {
+        0% { opacity: 0.25; transform: translateY(0px) scale(1); }
+        50% { opacity: 0.55; transform: translateY(-5px) scale(1.03); }
+        100% { opacity: 0.25; transform: translateY(0px) scale(1); }
+      }
+      @keyframes float-chip {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-6px); }
+        100% { transform: translateY(0px); }
+      }
+      .anim-pulse-1 {
+        transform-origin: 940px 140px;
+        animation: pulse-hotspot 3.2s ease-in-out infinite;
+      }
+      .anim-pulse-2 {
+        transform-origin: 1060px 220px;
+        animation: pulse-hotspot 2.6s ease-in-out infinite 0.8s;
+      }
+      .anim-dash {
+        stroke-dasharray: 8 6;
+        animation: dash-flow 2s linear infinite;
+      }
+      .anim-wave {
+        animation: wave-heat 4.5s ease-in-out infinite;
+      }
+      .anim-float {
+        animation: float-chip 6s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <!-- Deep Background Canvas -->
+  <rect width="1200" height="420" rx="16" fill="url(#bg-grad)" />
+
+  <!-- Outer Tech Border -->
+  <rect x="2" y="2" width="1196" height="416" rx="15" fill="none" stroke="url(#border-grad)" stroke-width="2" />
+
+  <!-- Microchip Layout Grid & Substrate Traces (Background Layer) -->
+  <g opacity="0.18">
+    <pattern id="silicon-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#38bdf8" stroke-width="0.75" />
+      <circle cx="0" cy="0" r="1.5" fill="#38bdf8" />
+    </pattern>
+    <rect width="1200" height="420" fill="url(#silicon-grid)" />
+  </g>
+
+  <!-- Animated Floorplan Simulation Graphic on Right Side (Safely behind & beside text) -->
+  <g transform="translate(10, 0)">
+    <!-- 3D IC Die Carrier Stack Outline -->
+    <rect x="800" y="55" width="340" height="290" rx="12" fill="#0b1329" fill-opacity="0.8" stroke="#1e293b" stroke-width="2" />
+    <text x="815" y="78" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5">3D IC DIE THERMAL FLOORPLAN</text>
+    
+    <!-- Floorplan Core Blocks -->
+    <!-- Core 0 - High Heat Compute Cluster -->
+    <rect x="820" y="95" width="150" height="110" rx="6" fill="#1e1b4b" stroke="#4338ca" stroke-width="1.5" />
+    <text x="830" y="115" fill="#a5b4fc" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">COMPUTE CORE 0</text>
+    <text x="830" y="130" fill="#f43f5e" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">🔥 98.4°C Hotspot</text>
+    <!-- Thermal Hotspot Glow -->
+    <circle class="anim-pulse-1" cx="940" cy="140" r="42" fill="url(#heat-grad)" filter="url(#hotspot-glow)" opacity="0.7" />
+
+    <!-- Core 1 - Memory / HBM Interface Block -->
+    <rect x="985" y="95" width="140" height="110" rx="6" fill="#0f172a" stroke="#0284c7" stroke-width="1.5" />
+    <text x="995" y="115" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">HBM3e PHY / NOC</text>
+    <text x="995" y="130" fill="#34d399" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">❄️ 54.2°C Cool Zone</text>
+    <circle cx="1070" cy="150" r="28" fill="#06b6d4" opacity="0.25" filter="url(#glow)" />
+
+    <!-- Core 2 - Neural Accelerator Block -->
+    <rect x="820" y="220" width="190" height="105" rx="6" fill="#18181b" stroke="#71717a" stroke-width="1.5" />
+    <text x="830" y="240" fill="#e4e4e7" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">NPU TENSOR TILES</text>
+    <text x="830" y="255" fill="#fbbf24" font-family="-apple-system, sans-serif" font-size="10" font-weight="600">⚡ 82.1°C Active</text>
+    <circle class="anim-pulse-2" cx="950" cy="275" r="32" fill="#f59e0b" filter="url(#glow)" opacity="0.6" />
+
+    <!-- Core 3 - Voltage Reg & TSV Arrays -->
+    <rect x="1025" y="220" width="100" height="105" rx="6" fill="#082f49" stroke="#0284c7" stroke-width="1.5" />
+    <text x="1035" y="240" fill="#7dd3fc" font-family="-apple-system, sans-serif" font-size="11" font-weight="700">TSV ARRAY</text>
+    <text x="1035" y="255" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="10">Thermal Vias</text>
+
+    <!-- Interconnect Signal Traces -->
+    <path class="anim-dash" d="M 890 205 L 890 220" stroke="#f43f5e" stroke-width="2.5" fill="none" />
+    <path class="anim-dash" d="M 970 150 L 985 150" stroke="#38bdf8" stroke-width="2" fill="none" />
+    <path class="anim-dash" d="M 1010 270 L 1025 270" stroke="#38bdf8" stroke-width="2" fill="none" />
+  </g>
+
+  <!-- Left Side: Main Title & Foreground Content (High contrast, clearly in foreground) -->
+  <g transform="translate(60, 0)">
+    <!-- Domain Tag Pill -->
+    <g transform="translate(0, 68)">
+      <rect width="380" height="30" rx="15" fill="#1e293b" fill-opacity="0.9" stroke="#38bdf8" stroke-width="1" />
+      <circle cx="16" cy="15" r="4" fill="#38bdf8" filter="url(#glow)" />
+      <text x="28" y="20" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2">
+        SEMICONDUCTOR EDA &amp; 3D IC ARCHITECTURE
+      </text>
+    </g>
+
+    <!-- Main Title -->
+    <text x="0" y="145" fill="url(#title-grad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" font-size="34" font-weight="800" letter-spacing="-0.5">
+      Awesome Microchip Thermal
+    </text>
+    <text x="0" y="190" fill="url(#title-grad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif" font-size="34" font-weight="800" letter-spacing="-0.5">
+      Layout Architecture Engines
+    </text>
+
+    <!-- Subtitle -->
+    <text x="0" y="235" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15.5" font-weight="400">
+      Curated directory of SaaS suites, Open-Source EDA solvers,
+    </text>
+    <text x="0" y="260" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15.5" font-weight="400">
+      and electro-thermal co-simulation frameworks for cooler silicon.
+    </text>
+
+    <!-- Feature Badges Row -->
+    <g transform="translate(0, 305)">
+      <!-- Badge 1 -->
+      <g transform="translate(0, 0)">
+        <rect width="180" height="34" rx="8" fill="#0f172a" stroke="#3b82f6" stroke-width="1.2" />
+        <text x="14" y="22" fill="#93c5fd" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">
+          🔥 Hot-Spot Prevention
+        </text>
+      </g>
+      <!-- Badge 2 -->
+      <g transform="translate(192, 0)">
+        <rect width="180" height="34" rx="8" fill="#0f172a" stroke="#8b5cf6" stroke-width="1.2" />
+        <text x="14" y="22" fill="#c4b5fd" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">
+          ⚡ Electro-Thermal Sim
+        </text>
+      </g>
+      <!-- Badge 3 -->
+      <g transform="translate(384, 0)">
+        <rect width="190" height="34" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.2" />
+        <text x="14" y="22" fill="#6ee7b7" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">
+          🧩 3D IC Floorplanning
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
